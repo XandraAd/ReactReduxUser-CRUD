@@ -7,12 +7,12 @@ import { Container, Row, Col } from "react-bootstrap";
 function App() {
   return (
     <>
-      <Container>
+      <Container >
         <Row>
           <Col md={6}>
             <UserForm />
           </Col>
-          <Col md={6}>
+          <Col   md={6}>
             <User />
           </Col>
         </Row>

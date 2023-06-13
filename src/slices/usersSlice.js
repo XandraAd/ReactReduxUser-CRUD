@@ -1,8 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuid } from "uuid";
 //import { useState } from 'react'
 
 const initialState = {
-    users:[],
+    users:[{
+        name: "John Add",
+        email: "email@example.com",
+        gen: 23,
+        phone:"0507777778",
+        id: uuid(),
+      },
+      {
+        name: "Ama Subtract",
+        email: "sub@example.com",
+        gen: 23,
+        phone:"02446776898",
+        id: uuid(),
+      },
+      {
+        name: "Peter Multiply",
+        email: "peter@example.com",
+        gen: 23,
+        phone:"05449823146",
+        id: uuid(),
+      },],
     number: 0,
     count: 0
 };
@@ -17,7 +38,7 @@ const usersSlice = createSlice({
 
        deleteUser:(state,action)=>{
         state.users=state.users.filter((user)=> {
-            if(user.id!==action.payload)
+            if(user.id!==action.payload.id)
             return user
         })
                               
@@ -26,7 +47,7 @@ const usersSlice = createSlice({
        editUser:(state,action)=>{
         state.users=state.users.map((user)=> {
             if(user.id===action.payload.id){
-                return action.payload.NewData
+                return action.payload
             }
             return user
         })
@@ -44,6 +65,6 @@ const usersSlice = createSlice({
 })
 
 
-export const {increaseCount, decreaseCount, addNumber, addUser, editUser  } = usersSlice.actions;
+export const {addUser, editUser, deleteUser  } = usersSlice.actions;
 
 export  default usersSlice.reducer

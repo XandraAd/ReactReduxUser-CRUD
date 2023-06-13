@@ -9,6 +9,7 @@ const UserForm = () => {
   const dispatch= useDispatch()
   const [name, setName] = useState(""); 
   const [email, setEmail] = useState("");
+  const [gen, setGen] = useState("");
   const [phone, setPhone] = useState("");
 
   const handleNameChange = (e) => {
@@ -19,6 +20,11 @@ const UserForm = () => {
   const handleEmailChange = (e) => {
     e.preventDefault();
     setEmail( e.target.value);
+  };
+
+  const handleGenChange = (e) => {
+    e.preventDefault();
+    setGen( e.target.value);
   };
 
   const handlePhoneChange = (e) => {
@@ -33,6 +39,7 @@ const UserForm = () => {
       id: uuidv4(),
       name: name,
       email: email,
+      gen: gen,
       phone: phone,
     };
     dispatch(addUser(newUser));
@@ -48,8 +55,8 @@ const UserForm = () => {
           <Form.Label>Name</Form.Label>
           <Form.Control
             name="name"
-          
-            placeholder="Please enter Full Name"
+            value={name}
+          placeholder="Please enter Full Name"
             onChange={handleNameChange}
           />
         </Form.Group>
@@ -57,7 +64,7 @@ const UserForm = () => {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             name="email"
-           
+            value={email}
             placeholder="Enter email"
             onChange={handleEmailChange}
           />
@@ -65,11 +72,20 @@ const UserForm = () => {
             Well never share your email with anyone else.
           </Form.Text>
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicGen">
+          <Form.Label>Gen</Form.Label>
+          <Form.Control
+            name="gen"
+            value={gen}
+            placeholder="Enter phone number"
+            onChange={handleGenChange}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPhone">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
             name="phone"
-           
+            value={phone}
             placeholder="Enter phone number"
             onChange={handlePhoneChange}
           />

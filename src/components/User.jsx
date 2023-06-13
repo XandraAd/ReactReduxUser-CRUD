@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
-import {React, useState} from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Modal, Container, Row, Col, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import EditUsersForm from "./EditUsersForm";
+import { deleteUser } from "../slices/usersSlice";
 
 const User = () => {
   const state = useSelector((state) => {
@@ -23,6 +24,13 @@ const User = () => {
     setLgShow(true);
   };
 
+ 
+  
+
+  const handleDelete = (user) => {
+    dispatch(deleteUser(user));
+  };
+
   return (
     <Container>
       <Row>
@@ -32,23 +40,37 @@ const User = () => {
               <Modal.Title>Edit User Details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <EditUsersForm editUserDetail={editUser} closeModal={handleClose} />
+              <EditUsersForm
+                editUserDetail={editUser}
+                closeModal={handleClose}
+                
+                
+              />
             </Modal.Body>
           </Modal>
-          <Card.Body>
-            <h1>Users Details</h1>
-            {state.users.map((user, index) => (
-              <div key={index}>
-                <h3>Name: {user.name}</h3>
-                <p>Email: {user.email}</p>
-                <p>Phone Number: {user.phone}</p>
-                <Button onClick={() => handleShow(user)}>Edit</Button>
-                <Button className="ms-2" variant="danger">
-                  Delete
-                </Button>
-              </div>
-            ))}
-          </Card.Body>
+          <Card className="w-100 d-flex">
+            <Card.Body>
+              <h4 className="border">Users Details</h4>
+              {state.users.map((user) => {
+                return (
+                  <div key={user.id}>
+                    <p>Name:{user.name}</p>
+                    <p>Email:{user.email}</p>
+                    <p> Gen:{user.gen}</p>
+                    <p>Phone Number: {user.phone}</p>
+                    <Button onClick={() => handleShow(user)}>Edit</Button>
+                    <Button
+                      onClick={() => handleDelete(user)}
+                      className="ms-2"
+                      variant="danger"
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                );
+              })}
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>
@@ -56,4 +78,3 @@ const User = () => {
 };
 
 export default User;
-
